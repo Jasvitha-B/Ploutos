@@ -18,7 +18,7 @@
                 <h3 style="font-size: 22px; font-weight: 700;">Welcome to Ploutos</h3>
                 <p>Welcome to Ploutos. We're about to rebuild your financial life. Let's align on a few basics.</p>
                 <div class="form-group" style="margin-top: 10px;">
-                    <label for="onboardName">What should your AI bestie call you?</label>
+                    <label for="onboardName">What should your AI coach call you?</label>
                     <input type="text" id="onboardName" class="form-control" placeholder="E.g., Rich Kid" value="Financially Healing Homie">
                 </div>
                 <div class="form-group">
@@ -81,15 +81,15 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="onboardBestie">Pick your AI Coach Personality</label>
+                    <label for="onboardBestie">Select Mode</label>
                     <select id="onboardBestie" class="form-control">
-                        <option value="chaos" selected>Chaos Gremlin (Savage roasts 💀)</option>
-                        <option value="rich">Rich Bestie (Glamorous luxury mentor ✨)</option>
-                        <option value="gym">Gym Bro Investor (Discipline + grindset 🏋️)</option>
-                        <option value="therapist">Soft Therapist (Gentle supportive coaching 🫂)</option>
-                        <option value="villain">Corporate Villain (Money never sleeps 💼)</option>
-                        <option value="delulu">Delulu Motivator (Unrealistic confidence 🦄)</option>
-                        <option value="parent">Strict Indian Parent (Emotionally damaging 💀)</option>
+                        <option value="wealth" selected>Wealth Strategist</option>
+                        <option value="market">Market Analyst</option>
+                        <option value="growth">Growth Investor</option>
+                        <option value="risk">Risk Manager</option>
+                        <option value="planner">Long-term Planner</option>
+                        <option value="tax">Tax Optimizer</option>
+                        <option value="behavior">Behavioral Coach</option>
                     </select>
                 </div>
                 <div style="display: flex; gap: 15px; justify-content: center; margin-top: 10px;">
@@ -101,7 +101,7 @@
                 <h3 style="font-size: 22px; font-weight: 700;" id="loaderHeader">Building Financial Multiverse...</h3>
                 <div class="onboarding-loader">
                     <div class="spinner"></div>
-                    <p class="loader-text" id="loaderSubtext">Calculating emotional damage...</p>
+                    <p class="loader-text" id="loaderSubtext">Calculating projections...</p>
                 </div>
             </div>
         </div>
@@ -138,7 +138,7 @@
                 </div>
                 <div class="user-quick-stats">
                     <div class="streak-badge" onclick="triggerStreakToast()"><i class="fa-solid fa-fire"></i> <span id="streakCount">3 Days</span></div>
-                    <div class="personality-widget" id="activeBestieBadge"><i class="fa-solid fa-ghost"></i> <span id="activeBestieName">Chaos Gremlin</span></div>
+                    <div class="personality-widget" id="activeBestieBadge"><i class="fa-solid fa-briefcase"></i> <span id="activeBestieName">Wealth Strategist</span></div>
                 </div>
             </header>
             <section class="tab-content active" id="tab-dashboard">
@@ -160,7 +160,14 @@
                             </div>
                         </div>
                     </div>
-                    
+                    <div class="dashboard-card glass-panel card-span-4" style="justify-content: space-between;">
+                        <div class="card-header"><span class="card-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Money Aura</span></div>
+                        <div class="chart-container" style="height: 120px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                            <div id="auraIndicator" style="width: 70px; height: 70px; border-radius: 50%; box-shadow: 0 0 20px var(--aura-stable); background: var(--aura-stable); transition: all 0.5s ease; display:flex; align-items:center; justify-content:center; font-size:28px;">😎</div>
+                            <h4 id="auraLabel" style="font-weight: 700; margin-top:10px;">Stable Aura</h4>
+                            <p id="auraQuote" style="font-size: 11px; color: var(--text-muted); text-align: center;">You saved more than you spent. Capitalism is crying.</p>
+                        </div>
+                    </div>
 
                     <div class="dashboard-card glass-panel card-span-4">
                         <div class="card-header">
@@ -178,9 +185,32 @@
                     <div class="dashboard-card glass-panel card-span-8">
                         <div class="card-header">
                             <span class="card-title"><i class="fa-solid fa-chart-line"></i> Mental Stability vs Bank Balance</span>
-                            <span style="font-size: 11px; color: var(--text-muted); font-style: italic;">Self-Aware Metrics</span>
+                            <span style="font-size: 11px; color: var(--text-muted); font-style: italic;" id="stabilitySubtitle">Self-Aware Metrics</span>
                         </div>
                         <div class="chart-container"><canvas id="stabilityChart"></canvas></div>
+                        <div class="stability-controls" style="display:flex; gap:12px; align-items:center; margin-top:12px;">
+                            <div style="display:flex; flex-direction:column; gap:6px; width: 220px;">
+                                <label style="font-size:12px;">Mood (0-100)</label>
+                                <input type="range" id="stabilityMood" min="0" max="100" value="74" oninput="onStabilityInputChange()">
+                                <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-muted);">
+                                    <span id="stabilityMoodDisplay">74</span>
+                                    <span style="font-size:11px;">Mood</span>
+                                </div>
+                            </div>
+                            <div style="display:flex; flex-direction:column; gap:6px; width: 220px;">
+                                <label style="font-size:12px;">Monthly Spending (₹)</label>
+                                <input type="number" id="stabilitySpendingInput" class="form-control" value="1800" oninput="onStabilityInputChange()" style="padding:6px;">
+                                <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-muted);">
+                                    <span id="stabilitySpendingDisplay">₹1,800</span>
+                                    <button class="btn btn-secondary" onclick="resetStabilitySettings()" style="font-size:11px; padding:4px 8px;">Reset</button>
+                                </div>
+                            </div>
+                            <div style="display:flex; flex-direction:column; gap:6px; min-width:160px;">
+                                <label style="font-size:12px;">Computed Metrics</label>
+                                <div style="font-size:13px; font-weight:700;">Stability: <span id="stabilityPercDisplay">74%</span></div>
+                                <div style="font-size:13px; font-weight:700;">Bank Balance: <span id="bankPercentDisplay">40%</span></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-span-12" id="lifeStageModuleContainer"></div>
                     <div class="dashboard-card glass-panel card-span-4">
@@ -197,7 +227,7 @@
                         </div>
                         <button class="btn btn-secondary" onclick="openDelusionSimulator()" style="padding: 6px; font-size: 11px; margin-top: auto; width:100%;">Simulate Luxury Dream</button>
                     </div>
-                    <div class="dashboard-card glass-panel card-span-6">
+                    <div class="dashboard-card glass-panel card-span-4">
                         <div class="card-header"><span class="card-title"><i class="fa-solid fa-fire-burner"></i> Money Burn Rate</span></div>
                         <div class="burn-rate-display">
                             <span style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Bank Account Survives</span>
@@ -206,7 +236,7 @@
                         </div>
                         <p id="burnWarning" style="font-size: 11px; text-align: center; color: var(--text-muted); margin-top: 5px; font-weight:500;">Warning: Payday is 18 days away. High risk of vibrations-only nutrition.</p>
                     </div>
-                    <div class="dashboard-card glass-panel card-span-6">
+                    <div class="dashboard-card glass-panel card-span-4">
                         <div class="card-header"><span class="card-title"><i class="fa-solid fa-skull-crossbones"></i> Biggest Villain Purchases</span></div>
                         <div style="display:flex; flex-direction:column; gap:10px;">
                             <div style="display:flex; justify-content:space-between; align-items:center; background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius:8px;">
@@ -238,7 +268,7 @@
             <section class="tab-content" id="tab-coach">
                 <div class="chatbot-container glass-panel">
                     <div class="chat-sidebar" style="border-right: 1px solid var(--panel-border);">
-                        <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 5px;"><i class="fa-solid fa-users"></i> AI Bestie Modes</h4>
+                        <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 5px;"><i class="fa-solid fa-layer-group"></i> MODES</h4>
                         <div style="display: flex; flex-direction: column; gap: 8px; overflow-y: auto; flex-grow: 1;" id="coachBestieList"></div>
                         <hr style="border: none; border-top: 1px solid var(--panel-border); margin: 10px 0;">
                         <div class="form-group">
@@ -256,10 +286,10 @@
                     <div class="chat-area">
                         <div class="card-header" style="padding-bottom: 10px; border-bottom: 1px solid var(--panel-border);">
                             <div style="display:flex; align-items:center; gap:12px;">
-                                <div class="personality-avatar" id="chatActiveAvatar" style="background: rgba(139,92,246,0.2);">💀</div>
+                                <div class="personality-avatar" id="chatActiveAvatar" style="background: rgba(139,92,246,0.2);">💼</div>
                                 <div>
-                                    <h4 id="chatActiveName" style="font-size: 15px; font-weight: 700;">Chaos Gremlin</h4>
-                                    <p id="chatActiveSubtext" style="font-size: 10px; color: var(--text-muted);">Ready to roast your poor financial decisions.</p>
+                                    <h4 id="chatActiveName" style="font-size: 15px; font-weight: 700;">Wealth Strategist</h4>
+                                    <p id="chatActiveSubtext" style="font-size: 10px; color: var(--text-muted);">Data-driven guidance for long-term growth.</p>
                                 </div>
                             </div>
                             <button class="btn btn-secondary" onclick="clearChatHistory()" style="padding: 6px 12px; font-size: 11px;">Clear History</button>
@@ -273,7 +303,7 @@
                         </div>
                         <div class="chat-input-area">
                             <button class="chat-action-btn secondary" id="voiceToggleBtn" onclick="toggleVoiceInput()"><i class="fa-solid fa-microphone"></i></button>
-                            <input type="text" id="chatTextInput" class="chat-input" placeholder="Ask your financial bestie..." onkeydown="if(event.key === 'Enter') sendChatMessage()">
+                            <input type="text" id="chatTextInput" class="chat-input" placeholder="Ask your financial assistant..." onkeydown="if(event.key === 'Enter') sendChatMessage()">
                             <button class="chat-action-btn" onclick="sendChatMessage()"><i class="fa-solid fa-paper-plane"></i></button>
                         </div>
                     </div>
@@ -430,7 +460,7 @@
 
             <section class="tab-content" id="tab-profile">
                 <div class="profile-grid">
-                    <div class="profile-card glass-panel">
+                    <div class="profile-card glass-panel card-span-8">
                         <div class="card-header" style="margin-bottom: 20px;"><span class="card-title"><i class="fa-solid fa-address-card"></i> Manage Financial Profile</span></div>
                         <div class="profile-row">
                             <div class="form-group"><label for="profileName">User Name</label><input type="text" id="profileName" class="form-control" value="Financially Healing Homie" oninput="updateProfileFromInputs()"></div>
@@ -460,16 +490,7 @@
                             <button class="btn btn-primary" onclick="saveProfileChanges()">Save Changes & Recalculate</button>
                         </div>
                     </div>
-                    <div class="profile-sidebar">
-                        <div class="dashboard-card glass-panel" style="justify-content: space-between;">
-                        <div class="card-header"><span class="card-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Money Aura</span></div>
-                        <div class="chart-container" style="height: 120px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
-                            <div id="auraIndicator" style="width: 70px; height: 70px; border-radius: 50%; box-shadow: 0 0 20px var(--aura-stable); background: var(--aura-stable); transition: all 0.5s ease; display:flex; align-items:center; justify-content:center; font-size:28px;">😎</div>
-                            <h4 id="auraLabel" style="font-weight: 700; margin-top:10px;">Stable Aura</h4>
-                            <p id="auraQuote" style="font-size: 11px; color: var(--text-muted); text-align: center;">You saved more than you spent. Capitalism is crying.</p>
-                        </div>
-                    </div>
-                        <div class="dashboard-card glass-panel" style="justify-content: space-between;">
+                    <div class="dashboard-card glass-panel card-span-4" style="justify-content: space-between;">
                         <div class="card-header"><span class="card-title"><i class="fa-solid fa-shield-cat"></i> Risk & Credit Assistant</span></div>
                         <div style="display:flex; flex-direction:column; gap:10px;">
                             <div style="display:flex; justify-content:space-between; align-items:center; background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius:8px;">
@@ -484,14 +505,13 @@
                             <div id="riskFlagsContainer" style="display:flex; flex-direction:column; gap:6px;"></div>
                         </div>
                     </div>
-                    </div>
                 </div>
             </section>
 
     <div class="modal-overlay" id="delusionModal">
         <div class="modal-content glass-panel" style="display:flex; flex-direction:column; gap:20px;">
             <div class="card-header">
-                <span class="card-title"><i class="fa-solid fa-cloud"></i> Rich People Delusion Simulator</span>
+                <span class="card-title"><i class="fa-solid fa-cloud"></i> Luxury Dream Simulator</span>
                 <button class="btn" onclick="closeDelusionSimulator()" style="background:transparent; padding:0; font-size:18px; color:var(--text-main);">&times;</button>
             </div>
             <p style="font-size:13px; color:var(--text-muted); margin-top:-10px;">Want to quit your job and retire to a Bali beach villa? Let's check how much money that requires, and what happens to your timeline.</p>
@@ -507,7 +527,7 @@
             <div style="background:rgba(255,255,255,0.03); padding:15px; border-radius:var(--border-radius-md); font-size:13px; display:flex; flex-direction:column; gap:10px;">
                 <div>Estimated Net Worth Needed: <strong style="color:var(--accent-secondary);" id="delusionNeededVal">₹1,50,00,000</strong></div>
                 <div>Current Savings/Investments: <strong id="delusionCurrentVal">₹177,000</strong></div>
-                <div style="font-size:11px; line-height:1.4; color:var(--text-muted);" id="delusionFeedback">"Okay diva, you are currently at 1.1% of this goal. You would need to invest ₹45,000 monthly for 15 years, or secure a wealthy benefactor."</div>
+                <div style="font-size:11px; line-height:1.4; color:var(--text-muted);" id="delusionFeedback">"You are currently at 1.1% of this goal. You would need to invest ₹45,000 monthly for 15 years, or secure a wealthy benefactor."</div>
             </div>
             <div style="display:flex; justify-content:flex-end; gap:10px;">
                 <button class="btn btn-secondary" onclick="closeDelusionSimulator()">Close</button>
@@ -536,17 +556,17 @@
         <div class="trauma-card" style="position: relative;">
             <button class="btn" onclick="closeTraumaRecap()" style="position:absolute; top:20px; right:20px; background:transparent; border:none; font-size:24px; color:#ffffff;">&times;</button>
             <div class="trauma-slide active" id="traumaSlide1">
-                <span style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #a78bfa;">Spotify Wrapped Style</span>
-                <h2 class="trauma-title">Your 2026 Financial Trauma Recap</h2>
-                <p style="font-size: 14px; color: #d8b4fe; margin-top: 10px;">Let's review the crimes your bank account witnessed this year.</p>
-                <div style="font-size: 80px; margin: 20px 0;">😱</div>
-                <button class="btn btn-primary" onclick="nextTraumaSlide(2)" style="background:#f472b6; width:100%;">Let's Proceed (Deep Breath)</button>
+                <span style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #a78bfa;">Yearly Summary</span>
+                <h2 class="trauma-title">Your 2026 Financial Summary</h2>
+                <p style="font-size: 14px; color: #d8b4fe; margin-top: 10px;">Overview of spending, savings and key events for the year.</p>
+                <div style="font-size: 80px; margin: 20px 0;">📊</div>
+                <button class="btn btn-primary" onclick="nextTraumaSlide(2)" style="background:#f472b6; width:100%;">Proceed</button>
             </div>
             <div class="trauma-slide" id="traumaSlide2">
-                <span style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #a78bfa;">Your Biggest Opp</span>
-                <h2 class="trauma-title">The Main Villain Purchase</h2>
+                <span style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #a78bfa;">Top Expense</span>
+                <h2 class="trauma-title">Largest Expense Category</h2>
                 <div class="trauma-highlight" id="traumaVillainName">Bubble Tea</div>
-                <p style="font-size: 14px; color: #d8b4fe; line-height: 1.4;" id="traumaVillainDesc">You spent enough on bubble tea this month. Your future self is typing a strongly-worded email.</p>
+                <p style="font-size: 14px; color: #d8b4fe; line-height: 1.4;" id="traumaVillainDesc">This category accounted for a notable portion of your monthly spend. Consider tracking frequency and budget allocation.</p>
                 <div style="display:flex; gap:15px; justify-content:center; margin-top:10px; width:100%;">
                     <button class="btn btn-secondary" style="border-color:#a78bfa; flex:1;" onclick="prevTraumaSlide(1)">Back</button>
                     <button class="btn btn-primary" style="background:#f472b6; flex:1;" onclick="nextTraumaSlide(3)">Continue</button>
@@ -554,23 +574,107 @@
             </div>
             <div class="trauma-slide" id="traumaSlide3">
                 <span style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #a78bfa;">Spend Categories</span>
-                <h2 class="trauma-title">Emotional Damage Breakdown</h2>
+                <h2 class="trauma-title">Spending Breakdown</h2>
                 <div class="chart-container" style="height: 180px; margin: 15px 0;"><canvas id="traumaPieChart"></canvas></div>
-                <p style="font-size: 12px; color: #d8b4fe;" id="traumaPieDesc">45% of your spending went directly to "Coping Mechanisms" and "I Deserved It".</p>
+                <p style="font-size: 12px; color: #d8b4fe;" id="traumaPieDesc">Category-wise distribution of your expenses for the selected period.</p>
                 <div style="display:flex; gap:15px; justify-content:center; margin-top:10px; width:100%;">
                     <button class="btn btn-secondary" style="border-color:#a78bfa; flex:1;" onclick="prevTraumaSlide(2)">Back</button>
                     <button class="btn btn-primary" style="background:#f472b6; flex:1;" onclick="nextTraumaSlide(4)">Finish</button>
                 </div>
             </div>
             <div class="trauma-slide" id="traumaSlide4">
-                <span style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #a78bfa;">The Diagnosis</span>
-                <h2 class="trauma-title">Situationship: Healing Era</h2>
-                <p style="font-size: 14px; color: #d8b4fe; margin-top: 10px; line-height: 1.4;" id="traumaFinalText">You survived 2026 on vibes and ₹183, but there is hope. Compound interest is literally obsessed with you. Let's make 2027 the "Main Character Wealth Arc" together.</p>
-                <div style="font-size: 60px; margin: 15px 0;">🌱📈</div>
-                <button class="btn btn-primary" style="background:#a78bfa; width:100%;" onclick="closeTraumaRecap()">I Will Improve</button>
+                <span style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #a78bfa;">Summary</span>
+                <h2 class="trauma-title">Financial Health Summary</h2>
+                <p style="font-size: 14px; color: #d8b4fe; margin-top: 10px; line-height: 1.4;" id="traumaFinalText">Key takeaways: your current savings rate, major expense categories, and recommended next steps to improve cash flow and reach goals.</p>
+                <div style="font-size: 60px; margin: 15px 0;">📈</div>
+                <button class="btn btn-primary" style="background:#a78bfa; width:100%;" onclick="closeTraumaRecap()">Close</button>
             </div>
         </div>
     </div>
     <script src="app.js"></script>
+    <script>
+        // Interactive Stability controls and chart update
+        (function(){
+            const moodEl = document.getElementById('stabilityMood');
+            const moodDisplay = document.getElementById('stabilityMoodDisplay');
+            const spendingInput = document.getElementById('stabilitySpendingInput');
+            const spendingDisplay = document.getElementById('stabilitySpendingDisplay');
+            const stabilityPerc = document.getElementById('stabilityPercDisplay');
+            const bankPercent = document.getElementById('bankPercentDisplay');
+            const ctx = document.getElementById('stabilityChart').getContext('2d');
+
+            function getProfileNumber(id, fallback){
+                const el = document.getElementById(id);
+                if(!el) return fallback;
+                const v = Number(el.value || el.textContent.replace(/[^0-9.-]+/g, ''));
+                return isFinite(v) ? v : fallback;
+            }
+
+            const defaultIncome = getProfileNumber('profileIncome', getProfileNumber('onboardIncome', 65000));
+            const defaultSavings = getProfileNumber('profileSavings', 72000);
+            const defaultInvestments = getProfileNumber('profileInvestments', 105000);
+
+            // initialize from localStorage or defaults
+            const saved = JSON.parse(localStorage.getItem('ploutos_stability') || '{}');
+            if(saved.mood !== undefined) moodEl.value = saved.mood;
+            if(saved.spending !== undefined) spendingInput.value = saved.spending;
+
+            moodDisplay.textContent = moodEl.value;
+            spendingDisplay.textContent = '₹' + Number(spendingInput.value).toLocaleString();
+
+            function computeMetrics(){
+                const mood = Number(moodEl.value || 0);
+                const spending = Number(spendingInput.value || 0);
+                // stability reduces with higher spending relative to income
+                const spendImpact = (spending / Math.max(1, defaultIncome)) * 50; // scale factor
+                const stability = Math.round(Math.max(0, Math.min(100, mood - spendImpact)));
+
+                // bank percent relative to 6 months target
+                const bankRatio = (defaultSavings + defaultInvestments) / (defaultIncome * 6);
+                const bankPct = Math.round(Math.max(0, Math.min(100, bankRatio * 100)));
+
+                return {stability, bankPct, mood, spending};
+            }
+
+            // Chart.js simple two-bar display
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Metric'],
+                    datasets: [
+                        { label: 'Mental Stability (%)', backgroundColor: '#8b5cf6', data: [0] },
+                        { label: 'Bank Balance (%)', backgroundColor: '#06b6d4', data: [0] }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: { y: { beginAtZero: true, max: 100 } }
+                }
+            });
+
+            function updateUI(){
+                const m = computeMetrics();
+                stabilityPerc.textContent = m.stability + '%';
+                bankPercent.textContent = m.bankPct + '%';
+                moodDisplay.textContent = m.mood;
+                spendingDisplay.textContent = '₹' + Number(m.spending).toLocaleString();
+
+                chart.data.datasets[0].data[0] = m.stability;
+                chart.data.datasets[1].data[0] = m.bankPct;
+                chart.update();
+
+                localStorage.setItem('ploutos_stability', JSON.stringify({mood: Number(moodEl.value), spending: Number(spendingInput.value)}));
+            }
+
+            window.onStabilityInputChange = function(){ updateUI(); };
+            window.resetStabilitySettings = function(){
+                moodEl.value = 74; spendingInput.value = 1800;
+                updateUI();
+            };
+
+            // initialize
+            updateUI();
+        })();
+    </script>
 </body>
 </html>
