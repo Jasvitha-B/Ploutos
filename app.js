@@ -347,6 +347,7 @@ function initApp() {
     updateFinancialDashboard();
     initCoachPersonalitiesList();
     renderJarsList();
+    renderBadges();
     updateCreditAndRiskInfo();
     initCharts();
 }
@@ -710,6 +711,7 @@ function completeCoffeeChallenge(btn) {
         state.badges.push("coffee-slayer");
         claimXP(300);
         document.getElementById('coffeeBadge').classList.add('unlocked');
+        renderBadges();
         btn.innerText = "Claimed";
         btn.disabled = true;
         saveState();
@@ -1573,6 +1575,34 @@ function initTraumaPieChart() {
                     position: 'bottom',
                     labels: { color: '#ffffff', font: { family: 'Outfit', size: 10 } }
                 }
+            }
+        }
+    });
+}
+
+
+function renderBadges() {
+    const mappings = {
+        'onboarded': 'onboardBadge',
+        'first-investment': 'firstSeedBadge',
+        'coffee-slayer': 'coffeeBadge',
+        'week-fire': 'streakBadge'
+    };
+    
+    // Dynamically unlock week-fire if streak is 7 or more
+    if (state.streak >= 7 && !state.badges.includes('week-fire')) {
+        state.badges.push('week-fire');
+        saveState();
+        triggerToast("Badge Unlocked 🏆", "Week Fire badge added to your profile!", "fa-award");
+    }
+
+    Object.keys(mappings).forEach(key => {
+        const el = document.getElementById(mappings[key]);
+        if (el) {
+            if (state.badges.includes(key)) {
+                el.classList.add('unlocked');
+            } else {
+                el.classList.remove('unlocked');
             }
         }
     });
