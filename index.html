@@ -119,7 +119,7 @@
                 <li><a href="#" class="nav-item" onclick="switchTab('coach', event)"><i class="fa-solid fa-robot"></i> <span>AI Coach Chat</span></a></li>
                 <li><a href="#" class="nav-item" onclick="switchTab('calculators', event)"><i class="fa-solid fa-calculator"></i> <span>Simulators & Tools</span></a></li>
                 <li><a href="#" class="nav-item" onclick="switchTab('habits', event)"><i class="fa-solid fa-trophy"></i> <span>Streaks & Jars</span></a></li>
-                <li><a href="#" class="nav-item" onclick="switchTab('couple', event)"><i class="fa-solid fa-user-group"></i> <span>Family Mode</span></a></li>
+                
                 <li><a href="#" class="nav-item" onclick="switchTab('profile', event)"><i class="fa-solid fa-user-gear"></i> <span>Profile & Aura</span></a></li>
             </ul>
             <div class="sidebar-footer">
@@ -433,55 +433,7 @@
                 </div>
             </section>
 
-            <section class="tab-content" id="tab-couple">
-                <div class="dashboard-grid">
-                    <div class="dashboard-card glass-panel card-span-12" style="background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(6,182,212,0.1));">
-                        <div class="card-header">
-                            <span class="card-title"><i class="fa-solid fa-user-group"></i> Couple / Family Finance Mode</span>
-                            <div class="switch-control">
-                                <span style="font-size:12px; font-weight:700; margin-right:10px;" id="familyModeStatus">Shared Budgeting Active</span>
-                                <label class="switch">
-                                    <input type="checkbox" id="familyModeToggle" checked onchange="toggleFamilyMode()">
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <p style="font-size:13px; color:var(--text-muted); margin-top:-5px;">Align budgets, track joint savings jars, and analyze combined emergency cushions.</p>
-                    </div>
-                    <div class="dashboard-card glass-panel card-span-8">
-                        <div class="card-header"><span class="card-title"><i class="fa-solid fa-ring"></i> Shared Goals & Jars</span></div>
-                        <div style="display:flex; flex-direction:column; gap:15px; margin-top:10px;">
-                            <div>
-                                <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px;"><span>🏡 Dream House Fund (Joint)</span><span style="font-weight:700;">₹14,50,000 / ₹2,50,00,000</span></div>
-                                <div style="width:100%; height:12px; background:var(--input-bg); border-radius:6px; overflow:hidden; display:flex;">
-                                    <div style="width:12%; background:#8b5cf6; height:100%;"></div>
-                                    <div style="width:6%; background:#06b6d4; height:100%;"></div>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; font-size:10px; color:var(--text-muted); margin-top:4px;"><span>Your contribution: ₹3,00,000 (1.2%)</span><span>Partner: ₹1,50,00,000 (0.6%)</span></div>
-                            </div>
-                            <div>
-                                <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px;"><span>✈️ Japan Vacation Fund (Joint)</span><span style="font-weight:700;">₹1,80,000 / ₹3,00,000</span></div>
-                                <div style="width:100%; height:12px; background:var(--input-bg); border-radius:6px; overflow:hidden; display:flex;">
-                                    <div style="width:30%; background:#8b5cf6; height:100%;"></div>
-                                    <div style="width:30%; background:#06b6d4; height:100%;"></div>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; font-size:10px; color:var(--text-muted); margin-top:4px;"><span>Your contribution: ₹90,000 (30%)</span><span>Partner: ₹90,000 (30%)</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dashboard-card glass-panel card-span-4">
-                        <div class="card-header"><span class="card-title"><i class="fa-solid fa-heart"></i> Partner's Money Aura</span></div>
-                        <div style="display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; padding:10px 0;">
-                            <div style="width:60px; height:60px; border-radius:50%; background:var(--aura-chaotic); box-shadow:0 0 15px var(--aura-chaotic); display:flex; align-items:center; justify-content:center; font-size:24px;">😈</div>
-                            <div>
-                                <h4 style="font-weight:700;">Chaotic Aura</h4>
-                                <p style="font-size:11px; color:var(--text-muted); margin-top:4px;">Partner spent ₹4,200 on "organizers" today.</p>
-                            </div>
-                            <button class="btn btn-secondary" onclick="nagPartner()" style="padding: 4px 12px; font-size: 11px; width:100%;"><i class="fa-solid fa-bell"></i> Send Gentle Nudge</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            
 
             <section class="tab-content" id="tab-profile">
                 <div class="profile-grid">

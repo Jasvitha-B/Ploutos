@@ -683,21 +683,9 @@ function addJarFunds(id, amt) {
     updateFinancialDashboard();
 }
 
-function toggleFamilyMode() {
-    const checked = document.getElementById('familyModeToggle').checked;
-    const status = document.getElementById('familyModeStatus');
-    if (checked) {
-        status.innerText = "Shared Budgeting Active";
-        triggerToast("Couple Mode Sync", "Connecting savings feeds... Joint goals ready.", "fa-heart");
-    } else {
-        status.innerText = "Shared Budgeting Paused";
-        triggerToast("Couple Mode Paused", "Feed split. Back to independent wallets.", "fa-user-lock");
-    }
-}
 
-function nagPartner() {
-    triggerToast("Nudge Sent 📲", "Nudge sent: 'Babe, did we REALLY need that ₹4,200 organizer?'", "fa-paper-plane");
-}
+
+
 
 function claimXP(amt) {
     state.xp += amt;
