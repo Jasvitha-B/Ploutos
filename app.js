@@ -545,11 +545,11 @@ function updateVillainWidget() {
     const roast = document.getElementById('villainRoast');
     const risk = state.riskComfort;
     if (risk === 'degenerate') {
-        roast.innerText = ""Crypto options trading is literally your financial arch-nemesis this month."";
+        roast.innerText = "Crypto options trading is literally your financial arch-nemesis this month.";
     } else if (state.expenses > state.income * 0.7) {
-        roast.innerText = ""Rent and food delivery are eating 80% of your earnings. You're basically funding Zomato's HQ expansion."";
+        roast.innerText = "Rent and food delivery are eating 80% of your earnings. You're basically funding Zomato's HQ expansion.";
     } else {
-        roast.innerText = ""You ignored the urge to buy nonsense today. The economy hates to see you improving."";
+        roast.innerText = "You ignored the urge to buy nonsense today. The economy hates to see you improving.";
     }
 }
 
