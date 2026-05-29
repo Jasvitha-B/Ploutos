@@ -689,17 +689,49 @@ body {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 24px;
+    align-items: start;
 }
 
 .profile-card {
     padding: 24px;
+    grid-column: span 8;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.profile-sidebar {
+    grid-column: span 4;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .profile-row {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-bottom: 15px;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.profile-row .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.profile-row .form-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 900px) {
+    .profile-card, .profile-sidebar {
+        grid-column: span 12;
+    }
 }
 
 /* --- Charts Area --- */
