@@ -696,7 +696,7 @@ function toggleFamilyMode() {
 }
 
 function nagPartner() {
-    triggerToast("Nudge Sent 💬", "Nudge sent: 'Babe, did we REALLY need that ₹4,200 organizer?'", "fa-paper-plane");
+    triggerToast("Nudge Sent 📲", "Nudge sent: 'Babe, did we REALLY need that ₹4,200 organizer?'", "fa-paper-plane");
 }
 
 function claimXP(amt) {
